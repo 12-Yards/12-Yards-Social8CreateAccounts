@@ -14,7 +14,6 @@ import {
   ChevronLeft,
   Circle,
   Trash2,
-  GitBranch,
   Loader2,
 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
@@ -29,7 +28,6 @@ export default function AdminPage() {
   const [selectedContact, setSelectedContact] = useState<ContactSubmission | null>(null);
   const [deleteConfirm, setDeleteConfirm] = useState<number | null>(null);
   const [deleting, setDeleting] = useState(false);
-  const [syncing, setSyncing] = useState(false);
   const queryClient = useQueryClient();
   const { toast } = useToast();
 
@@ -104,26 +102,6 @@ export default function AdminPage() {
     } catch {}
   };
 
-  const handleSyncGithub = async () => {
-    setSyncing(true);
-    try {
-      const res = await fetch("/api/admin/sync-github", {
-        method: "POST",
-        credentials: "include",
-      });
-      const data = await res.json();
-      if (data.success) {
-        const lastLine = data.output?.split("\n").filter((l: string) => l.includes("[GitHub Sync]")).pop() || "Changes pushed successfully.";
-        toast({ title: "Synced to GitHub", description: lastLine });
-      } else {
-        toast({ title: "Sync failed", description: data.output || "Unknown error", variant: "destructive" });
-      }
-    } catch {
-      toast({ title: "Sync failed", description: "Could not connect to GitHub.", variant: "destructive" });
-    } finally {
-      setSyncing(false);
-    }
-  };
 
   const newRegsCount = registrations.filter((r: Registration) => !r.isRead).length;
   const newContactsCount = contacts.filter((c: ContactSubmission) => !c.isRead).length;
@@ -146,16 +124,6 @@ export default function AdminPage() {
         <div className="container mx-auto flex h-14 items-center justify-between gap-4 px-4">
           <h1 className="text-lg font-bold" data-testid="heading-admin">Social8 Admin</h1>
           <div className="flex items-center gap-2">
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={handleSyncGithub}
-              disabled={syncing}
-              data-testid="button-sync-github"
-            >
-              {syncing ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : <GitBranch className="w-4 h-4 mr-2" />}
-              {syncing ? "Syncing..." : "Push to GitHub"}
-            </Button>
             <Button variant="ghost" size="sm" onClick={handleLogout} data-testid="button-admin-logout">
               <LogOut className="w-4 h-4 mr-2" />
               Logout
