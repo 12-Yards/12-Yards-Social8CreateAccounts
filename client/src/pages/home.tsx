@@ -59,7 +59,7 @@ function HeroSection() {
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div className="space-y-8">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight tracking-tight" data-testid="heading-hero">
-              The <span className="bg-gradient-to-r from-violet-600 to-fuchsia-600 bg-clip-text text-transparent">Ultimate</span> Online Platform to{" "}
+              The <span className="bg-gradient-to-r from-violet-600 to-fuchsia-600 bg-clip-text text-transparent">Ultimate</span> online platform to{" "}
               <span className="bg-gradient-to-r from-fuchsia-600 to-fuchsia-500 bg-clip-text text-transparent">grow</span>,{" "}
               <span className="bg-gradient-to-r from-violet-600 to-violet-500 bg-clip-text text-transparent">manage</span>, and{" "}
               <span className="bg-gradient-to-r from-fuchsia-600 to-violet-600 bg-clip-text text-transparent">empower</span> your community
