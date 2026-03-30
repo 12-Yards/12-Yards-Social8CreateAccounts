@@ -1,0 +1,20 @@
+uploads = []
+generated = []
+
+[[outputs]]
+id = "qtoqwEgGkEyqx7FXV-AKa"
+uri = "file://orbit8-source-changes.zip"
+type = "unspecified"
+title = "Orbit8 Source Changes (Latest)"
+
+[[outputs]]
+id = "FgAvunrEfyxOcTMcjut4Z"
+uri = "file://orbit8-logo-favicon.zip"
+type = "unspecified"
+title = "Orbit8 Logo & Favicon"
+
+[[outputs]]
+id = "zr-mQlrvcvsra-3ubzTvi"
+uri = "file://orbit8-recent-changes.zip"
+type = "unspecified"
+title = "Orbit8 Changes (Last 60 Minutes)"

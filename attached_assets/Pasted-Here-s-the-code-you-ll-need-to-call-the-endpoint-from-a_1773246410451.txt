@@ -1,0 +1,79 @@
+Here's the code you'll need to call the endpoint from another platform. I'll give you a few options depending on what you're using:
+
+JavaScript / Node.js:
+
+const response = await fetch("https://YOUR-DOMAIN.com/api/onboarding/tenant", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+    "x-api-key": "gj-onboard-test-key-2026"
+  },
+  body: JSON.stringify({
+    name: "My Golf Club",
+    domainName: "mygolfclub.com",
+    subDomain: "mygolfclub",
+    adminEmail: "admin@mygolfclub.com",
+    adminPassword: "SecurePass123!",
+    adminName: "Club Admin"
+  })
+});
+const data = await response.json();
+if (data.success) {
+  console.log("Tenant created:", data.tenant.id);
+  console.log("Admin user:", data.admin.email);
+} else {
+  console.error("Error:", data.error);
+}
+Python:
+
+import requests
+response = requests.post(
+    "https://YOUR-DOMAIN.com/api/onboarding/tenant",
+    headers={
+        "Content-Type": "application/json",
+        "x-api-key": "gj-onboard-test-key-2026"
+    },
+    json={
+        "name": "My Golf Club",
+        "domainName": "mygolfclub.com",
+        "subDomain": "mygolfclub",
+        "adminEmail": "admin@mygolfclub.com",
+        "adminPassword": "SecurePass123!",
+        "adminName": "Club Admin"
+    }
+)
+data = response.json()
+if data.get("success"):
+    print(f"Tenant created: {data['tenant']['id']}")
+    print(f"Admin user: {data['admin']['email']}")
+else:
+    print(f"Error: {data.get('error')}")
+cURL (for testing):
+
+curl -X POST https://YOUR-DOMAIN.com/api/onboarding/tenant \
+  -H "Content-Type: application/json" \
+  -H "x-api-key: gj-onboard-test-key-2026" \
+  -d '{
+    "name": "My Golf Club",
+    "domainName": "mygolfclub.com",
+    "subDomain": "mygolfclub",
+    "adminEmail": "admin@mygolfclub.com",
+    "adminPassword": "SecurePass123!",
+    "adminName": "Club Admin"
+  }'
+Required fields:
+
+Field	Type	Description
+name	string	Tenant/club name (required)
+domainName	string	Custom domain (optional)
+subDomain	string	Subdomain (optional)
+adminEmail	string	Admin's email (required, must be unique)
+adminPassword	string	Admin's password, min 6 chars (required)
+adminName	string	Admin's display name (required)
+Response codes:
+
+201 — Tenant created successfully
+400 — Validation error (missing fields, duplicate email/name)
+401 — Invalid or missing API key
+503 — API key not configured on the server
+Replace YOUR-DOMAIN.com with your actual published domain. The API key is currently gj-onboard-test-key-2026 — you can change it anytime in the Secrets tab. What platform will you be calling from?
