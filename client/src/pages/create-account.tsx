@@ -178,6 +178,7 @@ export default function CreateAccountPage() {
   const [submitting, setSubmitting] = useState(false);
   const [creatingPlatform, setCreatingPlatform] = useState(false);
   const [tenantError, setTenantError] = useState<string | null>(null);
+  const [showEmailExistsPopup, setShowEmailExistsPopup] = useState(false);
   const [dnsRecords, setDnsRecords] = useState<any[] | null>(null);
 
   const handleCompleteSetup = async () => {
@@ -204,7 +205,7 @@ export default function CreateAccountPage() {
 
       if (tenantData.emailExists) {
         setCreatingPlatform(false);
-        setTenantError("This email address is already registered. Please use a different email or log in to your existing account.");
+        setShowEmailExistsPopup(true);
         return;
       }
 
@@ -994,6 +995,41 @@ export default function CreateAccountPage() {
           </div>
         </Card>
         )}
+      {showEmailExistsPopup && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm" data-testid="popup-email-exists">
+          <Card className="w-full max-w-md mx-4 shadow-2xl">
+            <CardContent className="pt-6 pb-6 px-6 space-y-4">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-full bg-red-100 dark:bg-red-900/30 flex items-center justify-center flex-shrink-0">
+                  <AlertCircle className="w-5 h-5 text-red-600 dark:text-red-400" />
+                </div>
+                <h3 className="text-lg font-semibold" data-testid="heading-email-exists">Email Already Registered</h3>
+              </div>
+              <p className="text-sm text-muted-foreground" data-testid="text-email-exists-message">
+                This email address is already registered. Please use a different email or log in to your existing account.
+              </p>
+              <div className="flex gap-3 pt-2">
+                <Button
+                  variant="outline"
+                  className="flex-1"
+                  onClick={() => {
+                    setShowEmailExistsPopup(false);
+                    setStep("register");
+                  }}
+                  data-testid="button-change-email"
+                >
+                  Change Email
+                </Button>
+                <a href="https://social8community.social8.app" target="_blank" rel="noopener noreferrer" className="flex-1">
+                  <Button className="w-full" data-testid="button-login-existing">
+                    Log In
+                  </Button>
+                </a>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      )}
       </div>
     </div>
   );
