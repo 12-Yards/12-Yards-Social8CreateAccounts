@@ -243,15 +243,22 @@ export async function registerRoutes(
         data = { error: text || "Unexpected response from platform server" };
       }
 
+      const responseStr = JSON.stringify(data || {}).toLowerCase();
+      const emailAlreadyUsed = responseStr.includes("email already exists") || 
+        responseStr.includes("already existed") || 
+        responseStr.includes("existing account") ||
+        responseStr.includes("already registered") ||
+        data?.existingUser === true;
+
+      if (emailAlreadyUsed) {
+        return res.status(409).json({
+          success: false,
+          emailExists: true,
+          message: "This email address is already registered. Please use a different email or log in to your existing account.",
+        });
+      }
+
       if (!response.ok) {
-        const errorMsg = data?.error || data?.message || "";
-        if (typeof errorMsg === "string" && errorMsg.toLowerCase().includes("email already exists")) {
-          return res.status(409).json({
-            success: false,
-            emailExists: true,
-            message: "This email address is already registered. Please use a different email or log in to your existing account.",
-          });
-        }
         return res.status(response.status).json(data);
       }
 
