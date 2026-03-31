@@ -277,7 +277,7 @@ export default function FeaturePage() {
     const defaultTitle = "Community Management Software for Clubs & Members | Social8";
     const defaultDescription = "Social8 is an all-in-one community management platform for clubs and communities. Manage members, events, competitions, content, and reciprocal play from one powerful system.";
     const defaultImage = "/favicon.png";
-    const defaultUrl = "https://social8.io";
+    const defaultUrl = "https://social8.app";
     
     const updateMetaTag = (selector: string, attribute: string, value: string) => {
       const tag = document.querySelector(selector);

@@ -257,7 +257,7 @@ export default function CreateAccountPage() {
     if (hasDomain && domainName) {
       return domainName;
     }
-    return `${noDomainPrefix}.social8.io`;
+    return `${noDomainPrefix}.social8.app`;
   };
 
   const getAdminUrl = () => {
@@ -401,7 +401,7 @@ export default function CreateAccountPage() {
       doc.text("Visit: ", margin + 7, y + 15);
       doc.setTextColor(2, 132, 199);
       doc.setFont("helvetica", "bold");
-      doc.textWithLink("checkdomainstatus.social8.io", margin + 18, y + 15, { url: "https://checkdomainstatus.social8.io/" });
+      doc.textWithLink("checkdomainstatus.social8.app", margin + 18, y + 15, { url: "https://checkdomainstatus.social8.app/" });
     }
 
     doc.save(`${orgName.replace(/[^a-zA-Z0-9]/g, "_")}_Platform_Details.pdf`);
@@ -644,13 +644,13 @@ export default function CreateAccountPage() {
                             To check the status of your domain, visit:
                           </p>
                           <a
-                            href="https://checkdomainstatus.social8.io/"
+                            href="https://checkdomainstatus.social8.app/"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="inline-flex items-center gap-1.5 mt-2 text-sm font-semibold text-violet-600 hover:underline"
                             data-testid="link-check-domain-status"
                           >
-                            checkdomainstatus.social8.io
+                            checkdomainstatus.social8.app
                             <ExternalLink className="w-3.5 h-3.5" />
                           </a>
                         </div>
@@ -852,7 +852,7 @@ export default function CreateAccountPage() {
                                 </span>
                               )}
                               <span className="font-mono font-semibold" data-testid="text-no-domain-suffix">
-                                .social8.io
+                                .social8.app
                               </span>
                             </div>
                           </div>
