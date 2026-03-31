@@ -246,12 +246,10 @@ export async function registerRoutes(
       if (!response.ok) {
         const errorMsg = data?.error || data?.message || "";
         if (typeof errorMsg === "string" && errorMsg.toLowerCase().includes("email already exists")) {
-          return res.status(201).json({
-            success: true,
-            tenant: data.tenant || { name, domainName, subDomain },
-            admin: data.admin || { email: adminEmail, name: adminName },
-            note: "Admin user already existed, tenant linked to existing account.",
-            existingUser: true,
+          return res.status(409).json({
+            success: false,
+            emailExists: true,
+            message: "This email address is already registered. Please use a different email or log in to your existing account.",
           });
         }
         return res.status(response.status).json(data);

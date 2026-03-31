@@ -202,6 +202,12 @@ export default function CreateAccountPage() {
 
       const tenantData = await tenantResponse.json();
 
+      if (tenantData.emailExists) {
+        setCreatingPlatform(false);
+        setTenantError("This email address is already registered. Please use a different email or log in to your existing account.");
+        return;
+      }
+
       if (tenantResponse.ok && tenantData.success) {
         await apiRequest("POST", "/api/registrations", {
           orgName,
@@ -215,7 +221,7 @@ export default function CreateAccountPage() {
           secondaryColor,
         });
 
-        if (hasDomain && domainName && !tenantData.existingUser) {
+        if (hasDomain && domainName) {
           try {
             const dnsResponse = await fetch("/api/onboarding/custom-domain-dns", {
               method: "POST",
