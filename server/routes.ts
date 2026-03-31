@@ -254,7 +254,7 @@ export async function registerRoutes(
         return res.status(409).json({
           success: false,
           emailExists: true,
-          message: "This email address is already registered. Please use a different email or log in to your existing account.",
+          message: "This email address is already registered to a platform. Please update your email address.",
         });
       }
 

@@ -1006,25 +1006,19 @@ export default function CreateAccountPage() {
                 <h3 className="text-lg font-semibold" data-testid="heading-email-exists">Email Already Registered</h3>
               </div>
               <p className="text-sm text-muted-foreground" data-testid="text-email-exists-message">
-                This email address is already registered. Please use a different email or log in to your existing account.
+                This email address is already registered to a platform. Please update your email address.
               </p>
-              <div className="flex gap-3 pt-2">
+              <div className="pt-2">
                 <Button
-                  variant="outline"
-                  className="flex-1"
+                  className="w-full"
                   onClick={() => {
                     setShowEmailExistsPopup(false);
                     setStep("register");
                   }}
                   data-testid="button-change-email"
                 >
-                  Change Email
+                  Update Email
                 </Button>
-                <a href="https://social8community.social8.app" target="_blank" rel="noopener noreferrer" className="flex-1">
-                  <Button className="w-full" data-testid="button-login-existing">
-                    Log In
-                  </Button>
-                </a>
               </div>
             </CardContent>
           </Card>
