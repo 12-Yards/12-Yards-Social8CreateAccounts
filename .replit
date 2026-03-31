@@ -44,7 +44,7 @@ args = "npm run dev"
 
 [userenv.shared]
 ONBOARDING_API_KEY = "gj-onboard-test-key-2026"
-ONBOARDING_API_URL = "https://democommunity.social8.app"
+ONBOARDING_API_URL = "https://social8community.social8.app"
 DNS_ADMIN_EMAIL = "paul.morgan@12yards.app"
 ADMIN_PASSWORD = "2026Vibe!!!"
 

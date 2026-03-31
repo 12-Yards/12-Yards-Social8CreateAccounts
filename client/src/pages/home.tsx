@@ -74,7 +74,7 @@ function HeroSection() {
                   <ArrowRight className="w-4 h-4" />
                 </Button>
               </Link>
-              <a href="https://democommunity.social8.app" target="_blank" rel="noopener noreferrer">
+              <a href="https://social8community.social8.app" target="_blank" rel="noopener noreferrer">
                 <Button size="lg" variant="outline" className="gap-2" data-testid="button-view-platform">
                   <Play className="w-4 h-4" />
                   View Platform
@@ -288,7 +288,7 @@ function CTASection() {
             Join thousands of communities already using Social8 to engage their members.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
-            <a href="https://democommunity.social8.app" target="_blank" rel="noopener noreferrer">
+            <a href="https://social8community.social8.app" target="_blank" rel="noopener noreferrer">
               <Button size="lg" className="gap-2 bg-white text-fuchsia-700" data-testid="button-view-platform-home">
                 View Platform
                 <ArrowRight className="w-4 h-4" />
