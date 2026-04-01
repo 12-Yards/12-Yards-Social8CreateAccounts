@@ -96,26 +96,6 @@ export default function CreateAccountPage() {
       return;
     }
 
-    setCheckingEmail(true);
-    try {
-      const res = await fetch("/api/check-email", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email: email.trim().toLowerCase() }),
-      });
-      const data = await res.json();
-      if (data.exists) {
-        showValidationErrors(["This email address is already in use. Please use a different email."]);
-        setCheckingEmail(false);
-        return;
-      }
-    } catch {
-      showValidationErrors(["Unable to verify email availability. Please try again."]);
-      setCheckingEmail(false);
-      return;
-    }
-    setCheckingEmail(false);
-
     setValidationErrors([]);
     setStep("identity");
   };
