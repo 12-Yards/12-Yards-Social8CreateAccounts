@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { updatePageSEO, resetPageSEO } from "@/lib/seo";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -9,6 +10,15 @@ import logoPath from "@assets/Social8PNGLogo_1774859933898.png";
 import { apiRequest } from "@/lib/queryClient";
 
 export default function ContactPage() {
+  useEffect(() => {
+    updatePageSEO({
+      title: "Contact Us | Social8",
+      description: "Get in touch with the Social8 team. We'd love to hear from you about our community management platform.",
+      url: "/contact",
+    });
+    return () => resetPageSEO();
+  }, []);
+
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [organisation, setOrganisation] = useState("");

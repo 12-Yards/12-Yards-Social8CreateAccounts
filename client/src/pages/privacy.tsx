@@ -1,9 +1,20 @@
+import { useEffect } from "react";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 import logoPath from "@assets/Social8PNGLogo_1774859933898.png";
+import { updatePageSEO, resetPageSEO } from "@/lib/seo";
 
 export default function PrivacyPage() {
+  useEffect(() => {
+    updatePageSEO({
+      title: "Privacy Policy | Social8",
+      description: "Learn how Social8 collects, uses, and protects your personal data. Our privacy policy covers UK GDPR compliance, cookies, data retention, and your rights.",
+      url: "/privacy",
+    });
+    return () => resetPageSEO();
+  }, []);
+
   return (
     <div className="min-h-screen bg-background" data-testid="page-privacy">
       <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">

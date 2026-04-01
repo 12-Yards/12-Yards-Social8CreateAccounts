@@ -72,6 +72,47 @@ export async function registerRoutes(
     return res.status(201).json(registration);
   });
 
+  app.get("/sitemap.xml", (_req: Request, res: Response) => {
+    const baseUrl = "https://social8.app";
+    const pages = [
+      { loc: "/", priority: "1.0", changefreq: "weekly" },
+      { loc: "/create-account", priority: "0.9", changefreq: "monthly" },
+      { loc: "/contact", priority: "0.8", changefreq: "monthly" },
+      { loc: "/terms", priority: "0.5", changefreq: "yearly" },
+      { loc: "/privacy", priority: "0.5", changefreq: "yearly" },
+      { loc: "/features/member-communication", priority: "0.8", changefreq: "monthly" },
+      { loc: "/features/groups-communities", priority: "0.8", changefreq: "monthly" },
+      { loc: "/features/events-competitions", priority: "0.8", changefreq: "monthly" },
+      { loc: "/features/ai-feature-create", priority: "0.8", changefreq: "monthly" },
+      { loc: "/features/content-publishing", priority: "0.8", changefreq: "monthly" },
+      { loc: "/features/analytics-reporting", priority: "0.8", changefreq: "monthly" },
+    ];
+    const today = new Date().toISOString().split("T")[0];
+    const xml = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${pages.map(p => `  <url>
+    <loc>${baseUrl}${p.loc}</loc>
+    <lastmod>${today}</lastmod>
+    <changefreq>${p.changefreq}</changefreq>
+    <priority>${p.priority}</priority>
+  </url>`).join("\n")}
+</urlset>`;
+    res.header("Content-Type", "application/xml");
+    res.send(xml);
+  });
+
+  app.get("/robots.txt", (_req: Request, res: Response) => {
+    const txt = `User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /admin/login
+Disallow: /api/
+
+Sitemap: https://social8.app/sitemap.xml`;
+    res.header("Content-Type", "text/plain");
+    res.send(txt);
+  });
+
   app.post("/api/contacts", async (req: Request, res: Response) => {
     const parsed = insertContactSchema.safeParse(req.body);
     if (!parsed.success) {

@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import { jsPDF } from "jspdf";
 import { apiRequest } from "@/lib/queryClient";
+import { updatePageSEO, resetPageSEO } from "@/lib/seo";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -26,6 +27,16 @@ type OnboardingStep = "register" | "identity" | "terms";
 
 export default function CreateAccountPage() {
   const { toast } = useToast();
+
+  useEffect(() => {
+    updatePageSEO({
+      title: "Create Your Community Platform | Social8",
+      description: "Set up your community management platform in minutes. Create your Social8 account and start managing members, events, and content today.",
+      url: "/create-account",
+    });
+    return () => resetPageSEO();
+  }, []);
+
   const [step, setStep] = useState<OnboardingStep>("register");
   const [orgName, setOrgName] = useState("");
   const [userName, setUserName] = useState("");

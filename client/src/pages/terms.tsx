@@ -1,9 +1,20 @@
+import { useEffect } from "react";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 import logoPath from "@assets/Social8PNGLogo_1774859933898.png";
+import { updatePageSEO, resetPageSEO } from "@/lib/seo";
 
 export default function TermsPage() {
+  useEffect(() => {
+    updatePageSEO({
+      title: "Terms of Service | Social8",
+      description: "Read the Social8 Terms of Service. Understand your rights and responsibilities when using our community management platform.",
+      url: "/terms",
+    });
+    return () => resetPageSEO();
+  }, []);
+
   return (
     <div className="min-h-screen bg-background" data-testid="page-terms">
       <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
