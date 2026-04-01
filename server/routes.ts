@@ -263,9 +263,9 @@ export async function registerRoutes(
       }
 
       return res.status(201).json(data);
-    } catch (err) {
-      console.error("Onboarding API error:", err);
-      return res.status(500).json({ message: "Failed to create tenant. The platform server may be unavailable." });
+    } catch (err: any) {
+      console.error("Onboarding API error:", err?.message || err);
+      return res.status(500).json({ message: "Failed to create tenant. The platform server may be unavailable.", detail: err?.message || String(err) });
     }
   });
 
