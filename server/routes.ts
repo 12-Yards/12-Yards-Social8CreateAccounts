@@ -249,7 +249,8 @@ export async function registerRoutes(
         responseStr.includes("already existed") || 
         responseStr.includes("existing account") ||
         responseStr.includes("already registered") ||
-        data?.existingUser === true;
+        data?.existingUser === true ||
+        (response.status === 500 && responseStr.includes("failed to create tenant"));
 
       if (emailAlreadyUsed) {
         return res.status(409).json({
