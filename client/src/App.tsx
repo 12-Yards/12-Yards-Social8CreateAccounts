@@ -10,8 +10,11 @@ import BenefitPage from "@/pages/benefit";
 import LoginPage from "@/pages/login";
 import CreateAccountPage from "@/pages/create-account";
 import ContactPage from "@/pages/contact";
+import TermsPage from "@/pages/terms";
+import PrivacyPage from "@/pages/privacy";
 import AdminLoginPage from "@/pages/admin-login";
 import AdminPage from "@/pages/admin";
+import CookieConsent from "@/components/cookie-consent";
 
 function Router() {
   return (
@@ -22,6 +25,8 @@ function Router() {
       <Route path="/login" component={LoginPage} />
       <Route path="/create-account" component={CreateAccountPage} />
       <Route path="/contact" component={ContactPage} />
+      <Route path="/terms" component={TermsPage} />
+      <Route path="/privacy" component={PrivacyPage} />
       <Route path="/admin/login" component={AdminLoginPage} />
       <Route path="/admin" component={AdminPage} />
       <Route component={NotFound} />
@@ -35,6 +40,7 @@ function App() {
       <TooltipProvider>
         <Toaster />
         <Router />
+        <CookieConsent />
       </TooltipProvider>
     </QueryClientProvider>
   );
