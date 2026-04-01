@@ -243,6 +243,7 @@ export async function registerRoutes(
         data = { error: text || "Unexpected response from platform server" };
       }
 
+      console.log("[TENANT RESPONSE]", response.status, JSON.stringify(data));
       const responseStr = JSON.stringify(data || {}).toLowerCase();
       const emailAlreadyUsed = responseStr.includes("email already exists") || 
         responseStr.includes("already existed") || 
@@ -264,8 +265,9 @@ export async function registerRoutes(
 
       return res.status(201).json(data);
     } catch (err: any) {
-      console.error("Onboarding API error:", err?.message || err);
-      return res.status(500).json({ message: "Failed to create tenant. The platform server may be unavailable.", detail: err?.message || String(err) });
+      const errMsg = err?.message || String(err);
+      console.log("[TENANT ERROR]", errMsg);
+      return res.status(500).json({ message: "Failed to create tenant. The platform server may be unavailable.", detail: errMsg });
     }
   });
 
