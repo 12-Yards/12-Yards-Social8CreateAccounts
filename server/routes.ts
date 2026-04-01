@@ -243,28 +243,11 @@ export async function registerRoutes(
         data = { error: text || "Unexpected response from platform server" };
       }
 
-      console.log("[TENANT RESPONSE]", response.status, JSON.stringify(data));
-      const responseStr = JSON.stringify(data || {}).toLowerCase();
-      const emailAlreadyUsed = responseStr.includes("email already exists") || 
-        responseStr.includes("already existed") || 
-        responseStr.includes("existing account") ||
-        responseStr.includes("already registered") ||
-        data?.existingUser === true ||
-        (response.status === 500 && responseStr.includes("failed to create tenant"));
-
-      if (emailAlreadyUsed) {
-        return res.status(409).json({
-          success: false,
-          emailExists: true,
-          message: "This email address is already registered to a platform. Please update your email address.",
-        });
-      }
-
       if (!response.ok) {
         return res.status(response.status).json(data);
       }
 
-      return res.status(201).json(data);
+      return res.status(201).json({ ...data, success: true });
     } catch (err: any) {
       const errMsg = err?.message || String(err);
       console.log("[TENANT ERROR]", errMsg);
